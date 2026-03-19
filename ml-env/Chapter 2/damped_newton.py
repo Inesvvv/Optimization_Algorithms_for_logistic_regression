@@ -79,12 +79,12 @@ def sista_damped_newton(p, q, hat_pi, D, beta0=None, u0=None, v0=None,
         pi_flat = pi.ravel()
         mean_k = D_flat @ pi_flat
         mean_sq_k = (D_flat ** 2) @ pi_flat
-        H_diag = mean_sq_k - mean_k ** 2 + mu
+        H_diag = mean_sq_k - mean_k ** 2 + mu # mu prevents division by zero 
 
         # (5b) Full proximal Newton direction
         z = beta - g / H_diag
         beta_newton = soft_threshold(z, gamma / H_diag)
-        direction = beta_newton - beta
+        direction = beta_newton - beta # here dif with proximal gradient descent since dont commit to this yet 
 
         # (5c) Backtracking line search (Armijo condition)
         # Descent measure: directional derivative approximation using the
@@ -96,7 +96,7 @@ def sista_damped_newton(p, q, hat_pi, D, beta0=None, u0=None, v0=None,
 
         alpha = alpha_init
         ls_iter = 0
-        max_ls = 30
+        max_ls = 30 # safeguard since after 30 steps shrank by almost 0 (0.5^(30))
         while ls_iter < max_ls:
             beta_trial = beta + alpha * direction
             C_trial = build_cost(beta_trial, D)
@@ -108,7 +108,7 @@ def sista_damped_newton(p, q, hat_pi, D, beta0=None, u0=None, v0=None,
 
             if f_trial <= f_cur + armijo_c * alpha * model_decrease:
                 break
-            alpha *= armijo_rho
+            alpha *= armijo_rho # if fails multiply alpha by 0.5 by default and try again
             ls_iter += 1
 
         ls_counts.append(ls_iter)
