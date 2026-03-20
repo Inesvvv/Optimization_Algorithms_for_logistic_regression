@@ -1,7 +1,8 @@
 """
 File created 19/03/2026
 This file aims to extract the data on marriage matching and create the features. 
-I will later apply SISTA with newton method to determine the relevant features/parameters in marriage matching
+SISTA with newton method is applied in files "personality_traits_testing.py" and "Choo_Siow_age_testing"
+to determine the relevant features/parameters in marriage matching
 
 Data sources:
   - Choo & Siow (2006 JPE), via Galichon's mec_optim: aggregate marriage counts by age group (60x60)
@@ -31,6 +32,7 @@ p_choo = n_avail[:, 0].astype(float)
 q_choo = n_avail[:, 1].astype(float)
 hat_pi_choo = marr.astype(float)
 
+# Choo Siow dataset info 
 print("=== Choo-Siow aggregate data ===")
 print(f"  Types (age groups): {nTypes}")
 print(f"  hat_pi shape: {hat_pi_choo.shape}")
@@ -39,7 +41,7 @@ print(f"  Total marriages: {hat_pi_choo.sum():,.0f}")
 # =============================================================================
 # 2. Personality Traits data (Galichon & Dupuy 2014)
 #    Each row = one married couple with both partners' characteristics
-#    m = husband, v = wife (from French: mari/femme)
+#    m = husband, v = wife 
 #    Big Five: conscientiousness, extraversion, agreeableness, emotional stability, autonomy + risk
 # =============================================================================
 trame_path = 'https://raw.githubusercontent.com/TraME-Project/TraME-Datasets/master/'
@@ -153,6 +155,6 @@ print(f"  hat_pi shape: {hat_pi_pers.shape}")
 print(f"  D shape: {D_pers.shape}  (K={D_pers.shape[0]} features)")
 print(f"  Features: {pers_basis_names}")
 
-print("\n=== Summary: ready for SISTA ===")
-print(f"  Option A - Choo-Siow (age groups):   p({nTypes},), q({nTypes},), hat_pi({nTypes},{nTypes}), D{D_choo.shape}")
-print(f"  Option B - Personality (educ bins):   p({n_types_m},), q({n_types_w},), hat_pi{hat_pi_pers.shape}, D{D_pers.shape}")
+# Dataset size info:
+#print(f"Choo-Siow (age groups):   p({nTypes},), q({nTypes},), hat_pi({nTypes},{nTypes}), D{D_choo.shape}")
+#print(f" Personality (educ bins):   p({n_types_m},), q({n_types_w},), hat_pi{hat_pi_pers.shape}, D{D_pers.shape}")
