@@ -118,7 +118,7 @@ for i, name in enumerate(basis_names):
 # 5. Run SISTA (proximal gradient) vs SISTA (Newton)
 # =============================================================================
 gamma = 5e-3
-n_iters = 2000
+n_iters = 100000
 sinkhorn_inner = 20
 
 print(f"\n{'=' * 65}")
