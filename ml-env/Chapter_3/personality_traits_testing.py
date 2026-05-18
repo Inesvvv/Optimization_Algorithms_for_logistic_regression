@@ -16,7 +16,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'Chapter 2'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'Chapter_2'))
 from sista_algorithm import sista, sista_newton
 
 # =============================================================================
